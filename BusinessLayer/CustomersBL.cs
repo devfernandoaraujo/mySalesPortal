@@ -1,26 +1,30 @@
 ﻿using SalesPortalDL.Entities;
 using SalesPortalDL.DataConnection;
-public class CustomersBL
+using Microsoft.Extensions.Configuration;
+
+namespace SalesPortalBL
 {
-
-    private readonly SalesPortalContext _dbConnection;
-    public CustomersBL(string connectionString, string databaseVersion)
+    public class CustomersBL
     {
 
-        this._dbConnection = new SalesPortalContext(connectionString, databaseVersion);
-
-    }
-
-    public Customer getCustomerbyId(int userId)
-    {
-
-        Customer? c = null;
-
-        if (userId > 0)
+        private readonly SalesPortalContext _dbConnection;
+        public CustomersBL(IConfiguration configuration)
         {
-            c = this._dbConnection.Customers.Where(x => x.customerId == userId).FirstOrDefault();
+            this._dbConnection = new SalesPortalContext(configuration);
+
         }
 
-        return c;
+        public Customer getCustomerById(int userId)
+        {
+
+            Customer? c = null;
+
+            if (userId > 0)
+            {
+                c = this._dbConnection.Customers.Where(x => x.customerId == userId).FirstOrDefault();
+            }
+
+            return c;
+        }
     }
 }

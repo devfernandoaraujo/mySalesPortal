@@ -1,31 +1,31 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using SalesPortalDL.Entities;
 
 namespace SalesPortalDL.DataConnection
 {
     public class SalesPortalContext : DbContext
     {
-        private readonly string _connectionString;
-        private readonly string _serverVersion;
-        public SalesPortalContext(string connectionString, string serverVersion)
-        {
-            this._connectionString = connectionString;
-            this._serverVersion = serverVersion;
-        }
 
+        protected readonly IConfiguration _configuration;
+
+        public SalesPortalContext(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseMySql(this._connectionString,
-                    new MySqlServerVersion(new Version(this._serverVersion)),
+                .UseMySql(this._configuration.GetConnectionString("mySalesConnectionString"),
+                    new MySqlServerVersion(new Version("10.5")),
                     null);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Customer>().ToTable("Customers");
-            modelBuilder.Entity<Product>().ToTable("Products");
-            modelBuilder.Entity<PurchaseDetail>().ToTable("PurchaseDetail");
+            modelBuilder.Entity<Customer>().ToTable("Customers").HasKey(x => x.customerId);
+            modelBuilder.Entity<Product>().ToTable("Products").HasKey(x => x.productId);
+            modelBuilder.Entity<PurchaseDetail>().ToTable("PurchaseDetails").HasKey(x => x.purchaseId);
         }
 
         //Entities 
