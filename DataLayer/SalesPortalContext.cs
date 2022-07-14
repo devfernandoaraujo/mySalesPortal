@@ -17,7 +17,7 @@ namespace SalesPortalDL.DataConnection
         {
             optionsBuilder
                 .UseMySql(this._configuration.GetConnectionString("mySalesConnectionString"),
-                    new MySqlServerVersion(new Version("10.5")),
+                    new MySqlServerVersion(new Version(_configuration["DatabaseVersion"])),
                     null);
         }
 
