@@ -2,7 +2,49 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row justify-content-center">
+    <div class="col-12 text-center">My Sales</div>
+    <div class="row justify-content-start">
+        <div class="col-8">
+            <div class="dropdown col-5">
+                <button class="btn btn-primary dropdown-toggle w-100" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Filters
+                </button>
+                <ul class=" dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item">d</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </br></br>
+    <div><span>Client name:</span>
+        <input type="text" />
+    </div>
+    <br />
+    <div><input type="checkbox" id="filterDate"><label for="filterDate">Include an specifique date.</label></div>
+    <div><span>Between<input type="text"></span><span>and <input type="text" </span></div>
+    <div>
+        <table id="grid-data" class="table table-condensed table-hover table-striped">
+            <thead>
+                <tr>
+                    <th data-column-id="id" data-type="numeric" data-identifier="true">Id</th>
+                    <th data-column-id="name">Name</th>
+                    <th data-column-id="email">Email</th>
+                    <th data-column-id="sender">Sender</th>
+                    <th data-column-id="purchaseDate" data-order="desc">Purchase Date</th>
+                    <th data-column-id="amount" data-order="desc">Amount</th>
+
+                </tr>
+            </thead>
+        </table>
+    </div>
 </div>
+
+@section Scripts{
+<script>
+    $(document).ready(function () {
+        $("#grid-data").bootgrid();
+    })
+</script>
+}
