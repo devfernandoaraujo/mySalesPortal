@@ -4,7 +4,7 @@
 
 <div class="row justify-content-center">
     <div class="col-12 text-center">My Sales</div>
-    <div class="row justify-content-start">
+    <div class="row mb-3 justify-content-start">
         <div class="col-8">
             <div class="dropdown col-5">
                 <button class="btn btn-primary dropdown-toggle w-100" type="button" id="dropdownMenuButton1"
@@ -17,11 +17,15 @@
             </div>
         </div>
     </div>
-    </br></br>
-    <div><span>Client name:</span>
-        <input type="text" />
+    <div class="row mb-3">
+        <div class="col-2">
+            <label for="clientName" class=" float-end text-end col-form-label text-right justify-content-end">Client
+                name:</label>
+        </div>
+        <div class="col">
+            <input class="form-control" type="text" placeholder="Client Name" id="clientName">
+        </div>
     </div>
-    <br />
     <div><input type="checkbox" id="filterDate"><label for="filterDate">Include an specifique date.</label></div>
     <div><span>Between<input type="text"></span><span>and <input type="text" </span></div>
     <div>
